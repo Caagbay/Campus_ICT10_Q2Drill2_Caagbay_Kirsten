@@ -1,9 +1,34 @@
-from pyscript import document, display
 
-gr7 = {"john lennon", "irene velasco", "lance cruz", "paul reyes"}
-gr8 ={"andrea geronimo", "isabelle lim", "charlize juan", "aaron de guzman" }
-gr9 = {"neil guzman", "eliana darjuan", "korn de leon"}
-gr10 = {"david denum", "elijah herrero"}
-newmembers = {"rohan way", "ynigo garcia"}
+from pyscript import document
 
-display(gr7|gr8|gr9|gr10|{newmembers}, target = "output1")
+# 
+gr7 = {"John Lennon", "Irene Velasco", "Lance Cruz", "Paul Reyes"}
+gr8 = {"Andrea Geronimo", "Isabelle Lim", "Charlize Juan", "Aaron de Guzman"}
+gr9 = {"Neil Guzman", "Eliana Darjuan", "Korn de Leon"}
+gr10 = {"David Denum", "Elijah Herrero"}
+
+# Combining
+all_members = gr7 | gr8 | gr9 | gr10
+
+
+# Function ? ithink
+def getData(event=None):
+
+    # names
+    first = document.getElementById("first").value.strip()
+    last = document.getElementById("last").value.strip()
+
+    # new member
+    if first and last:
+        all_members.add(f"{first} {last}".title())
+
+    # alphabetically
+    members_list = "<br>".join(sorted(all_members))
+
+    # full
+    document.getElementById("output1").innerHTML = f"""
+        <b>ALL MEMBERS:</b><br>
+        {members_list}
+        <br><br>
+        TOTAL MEMBERS: {len(all_members)}
+    """
